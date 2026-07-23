@@ -104,3 +104,40 @@ try:
     # person = create_person("李四", "25")  # 会报错
 except TypeError as e:
     print(f"类型错误: {e}")
+
+#生成器函数
+def read_file_lins(filename):
+    """逐行读取文件的生成器"""
+    try:
+        with open(filename,"r",encoding="utf-8") as file:
+            for line_num,line in enumerate(file,start=1):
+                yield line_num,line.strip()
+    except FileNotFoundError:
+        print(f"文件{filename}不存在")
+
+def prime_generator(limit):
+    """生成质数的生成器"""
+    def is_prime(num):
+        def is_prime(n):
+            if n<2:
+                return False
+            for i in range(2,int(n**0.5)+1):
+                if n%i==0:
+                    return False
+            return True
+    for num in range(2,limit+1):
+        if is_prime(num):
+            yield num
+def batch_generator(data,batch_size):
+        """批量处理数据的生成器"""
+        for i in range(0,len(data),batch_size):
+            yield data[i:i + batch_size]
+#使用生成器
+print("前20个质数：")
+primes=list(prime_generator(20))
+print(primes[:20])
+
+print("\n批量处理数据：")
+data=list(range(1,21))
+for batch in batch_generator(data,5):
+    print(f"批次:{batch}")

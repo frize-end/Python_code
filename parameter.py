@@ -62,28 +62,3 @@ print(f"立方：{apply_operation(numbers,cube)}")
 print(f"双倍：{apply_operation(numbers,double)}")
 #使用lambda函数
 print(f"加10:{apply_operation(numbers,lambda x:x+10)}")
-
-#返回函数（闭包）
-def create_multiplier(factor):
-    """创建乘法器函数"""
-    def multiplier(x):
-        return x * factor
-    return multiplier
-def create_counter(start=0):
-    """创建计数器函数"""
-    count=start
-    def counter():
-        nonlocal count
-        count += 1
-        return count
-    return counter
-#使用返回的函数
-double_multiplier=create_multiplier(2)
-triple_multiplier=create_multiplier(3)
-
-#使用计数器
-counter1=create_counter()
-counter2=create_counter(10)
-
-print(f"计数器1：{counter1()},{counter1()},{counter1()}")
-print(f"计数器2:{counter2()},{counter2()},{counter2()}")
