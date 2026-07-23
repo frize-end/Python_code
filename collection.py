@@ -31,4 +31,3 @@ print(f"连接字符串：{'-'.join(['a','b','z'])}")
 print(f"查找字符串：{text.find("python")}")
 print(f"替换字符串：{text.replace("python","Java")}")
 print(f"字符串居中：{text.strip().center(30,"*")}")
-#firststar
