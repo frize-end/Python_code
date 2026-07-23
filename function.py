@@ -141,3 +141,24 @@ print("\n批量处理数据：")
 data=list(range(1,21))
 for batch in batch_generator(data,5):
     print(f"批次:{batch}")
+
+#函数注解
+def calculate_sum(length:float,width:float)->float:
+    """计算矩形面积
+    Args:
+        length：长度
+        width：宽度
+    Returns:
+        面积"""
+    return length*width
+def process_data(data:List[int],multiplier:int = 2)->List[int]:
+    """处理数据"""
+    return [x*multiplier for x in data]
+from typing import Union,Optional,List
+    
+def advenced_function(
+        name:str,
+        age:int,
+        scores:Optional[List[float]]=None,
+        metadata:Dict[str,Union[str,int]]=None
+)
