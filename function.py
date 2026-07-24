@@ -154,11 +154,36 @@ def calculate_sum(length:float,width:float)->float:
 def process_data(data:List[int],multiplier:int = 2)->List[int]:
     """处理数据"""
     return [x*multiplier for x in data]
-from typing import Union,Optional,List
+from typing import Union,Optional,List,Dict
     
 def advenced_function(
         name:str,
         age:int,
         scores:Optional[List[float]]=None,
         metadata:Dict[str,Union[str,int]]=None
-)
+)->Dict[str,Union[str,int,float]]:
+    """高级函数注解示例"""
+    result={
+        "name":name,
+        "age":age
+    }
+    if scores:
+        result["average_score"]=sum(scores)/len(scores)
+    if metadata:
+        result.updata(metadata)
+
+    return result
+#使用带注释的函数
+area = calculate_sum(10.5,8.2)
+print(f"面积为：{area:.2f}")
+
+processed=process_data([1,2,3,4,5],3)
+print(f"处理后的数据：{processed}")
+
+result=advenced_function(
+    "张三",
+    25,
+    [85.5,92.0,78.5],
+    {"city":"北京","grade":3}
+    )
+print(f"高级函数结果：{result}")
