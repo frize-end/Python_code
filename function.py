@@ -197,4 +197,22 @@ def power(base,expponent):
 def log_message(level,message,timestamp=None):
     """记录日志信息"""
     import datetime
-    
+    if timestamp is None:
+        timestamp=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"[{timestamp}] [{level}] {message}")
+
+#创建偏函数
+square=partial(power,exponent=2)
+cube=partial(power,exponent=3)
+
+info_log=partial(log_message,"INFO")
+error_log=partial(log_message,"ERROR")
+warning_log=partial(log_message,"WARNING")
+
+#使用偏函数
+print(f"5的平方：{square(5)}")
+print(f"5的立方：{cube(5)}")
+
+info_log("程序启动")
+warning_log("内存使用过高")
+error_log("数据库连接失败")
