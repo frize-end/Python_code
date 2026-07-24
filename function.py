@@ -187,3 +187,14 @@ result=advenced_function(
     {"city":"北京","grade":3}
     )
 print(f"高级函数结果：{result}")
+
+#偏函数
+from functools import partial
+def power(base,expponent):
+    """"计算幂"""
+    return base**expponent
+
+def log_message(level,message,timestamp=None):
+    """记录日志信息"""
+    import datetime
+    
