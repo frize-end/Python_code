@@ -21,3 +21,11 @@ class StudentManager:
             name = self.students[student_id]["name"]
             del self.students[student_id]
             print(f"√ 删除学生{name}成功")
+        def update_student(self, student_id, **kwargs):
+            if student_id not in self.students:
+                raise ValueError(f"学生{student_id}不存在")
+            name = self.students[student_id]["name"]
+            for key,value in kwargs.items():
+                if key in ["name","age","score"]:
+                    self.students[student_id][key]=value
+            print(f"√ 更新学生{name}成功")
