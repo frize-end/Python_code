@@ -29,3 +29,12 @@ class StudentManager:
                 if key in ["name","age","score"]:
                     self.students[student_id][key]=value
             print(f"√ 更新学生{name}成功")
+        def add_score(self, student_id, score):
+            if student_id not in self.students:
+                raise ValueError(f"学生{student_id}不存在")
+            if not isinstance(score,{int,float}) or score<0 or score>100:
+                raise ValueError(f"成绩{score}不在合法范围内(0~100)")
+            self.students[student_id]["score"].append(score)
+            print(f"√ 添加学生{name}的考试成绩{score}成功")
+
+        
