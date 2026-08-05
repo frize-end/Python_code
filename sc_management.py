@@ -37,4 +37,10 @@ class StudentManager:
             self.students[student_id]["score"].append(score)
             print(f"√ 添加学生{name}的考试成绩{score}成功")
 
-        
+        def get_student_average(self, student_id):
+            if student_id not in self.students:
+                raise ValueError(f"学生{student_id}不存在")
+            score = self.students[student_id]["score"]
+            if not score:
+                return 0
+            return sum(score)/len(score)
