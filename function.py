@@ -34,8 +34,10 @@ def fibonacci(n):
     if n<=1:
         return n
     return fibonacci(n-1)+fibonacci(n-2)
-def fibonacci_memo(n,memo={}):
+def fibonacci_memo(n,memo=None):
     """带记忆化的斐波那契数列"""
+    if memo is None:
+        memo = {}
     if n in memo:
         return memo[n]
     if n<=1:
@@ -44,7 +46,7 @@ def fibonacci_memo(n,memo={}):
     return memo[n]
 #测试递归函数
 print(f"5的阶乘：{factorial(5)}")
-print(f"斐波那契数列前10项：")
+print("斐波那契数列前10项：")
 for i in range(10):
     print(f"F({i})={fibonacci_memo(i)}")
 
@@ -58,7 +60,7 @@ def retry(max_attempts=3):
                     return func(*args,**kwargs)
                 except Exception as e:
                     if attempt == max_attempts-1:
-                        raise e
+                        raise
                     print(f"第{attempt+1}次尝试失败：{e}")
             return None
         return wrapper
@@ -87,7 +89,7 @@ def validata_types(**types):
 def unreliable_function():
     import random
     if random.random() < 0.7:
-        raise Exception("随机失败")
+        raise Exception("随机失败")  # noqa: TRY002
     return "成功"
 @validata_types(name=str,age=int)
 def create_person(name,age):
@@ -96,7 +98,7 @@ def create_person(name,age):
 try:
     result = unreliable_function()
     print(f"结果:{result}")
-except Exception as e:
+except Exception as e:  # noqa: BLE001
     print(f"最终失败:{e}")
 try:
     person = create_person("张三", 25)
@@ -142,54 +144,65 @@ data=list(range(1,21))
 for batch in batch_generator(data,5):
     print(f"批次:{batch}")
 
-#函数注解
-def calculate_sum(length:float,width:float)->float:
+# 函数注解
+def calculate_area(length: float, width: float) -> float:
     """计算矩形面积
-    Args:
-        length：长度
-        width：宽度
-    Returns:
-        面积"""
-    return length*width
-def process_data(data:List[int],multiplier:int = 2)->List[int]:
-    """处理数据"""
-    return [x*multiplier for x in data]
-from typing import Union,Optional,List,Dict
     
-def advenced_function(
-        name:str,
-        age:int,
-        scores:Optional[List[float]]=None,
-        metadata:Dict[str,Union[str,int]]=None
-)->Dict[str,Union[str,int,float]]:
+    Args:
+        length: 长度
+        width: 宽度
+    
+    Returns:
+        面积
+    """
+    return length * width
+
+def process_data(data: list[int], multiplier: int = 2) -> list[int]:
+    """处理数据"""
+    return [x * multiplier for x in data]
+
+from typing import Dict, List, Optional, Union  # noqa: UP035
+
+
+def advanced_function(
+    name: str,
+    age: int,
+    scores: Optional[List[float]] = None,  # noqa: UP006, UP045
+    metadata: Dict[str, Union[str, int]] = None  # noqa: RUF013, UP006, UP007
+) -> Dict[str, Union[str, int, float]]:  # noqa: UP006, UP007
     """高级函数注解示例"""
-    result={
-        "name":name,
-        "age":age
+    result = {
+        "name": name,
+        "age": age
     }
+    
     if scores:
-        result["average_score"]=sum(scores)/len(scores)
+        result["average_score"] = sum(scores) / len(scores)
+    
     if metadata:
-        result.updata(metadata)
-
+        result.update(metadata)
+    
     return result
-#使用带注释的函数
-area = calculate_sum(10.5,8.2)
-print(f"面积为：{area:.2f}")
 
-processed=process_data([1,2,3,4,5],3)
-print(f"处理后的数据：{processed}")
+# 使用带注解的函数
+area = calculate_area(10.5, 8.2)
+print(f"面积: {area}")
 
-result=advenced_function(
-    "张三",
-    25,
-    [85.5,92.0,78.5],
-    {"city":"北京","grade":3}
-    )
-print(f"高级函数结果：{result}")
+processed = process_data([1, 2, 3, 4, 5], 3)
+print(f"处理后的数据: {processed}")
+
+result = advanced_function(
+    "张三", 
+    25, 
+    [85.5, 92.0, 78.5], 
+    {"city": "北京", "grade": 3}
+)
+print(f"高级函数结果: {result}")
 
 #偏函数
 from functools import partial
+
+
 def power(base,expponent):
     """"计算幂"""
     return base**expponent
@@ -198,7 +211,7 @@ def log_message(level,message,timestamp=None):
     """记录日志信息"""
     import datetime
     if timestamp is None:
-        timestamp=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        timestamp=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # noqa: DTZ005
         print(f"[{timestamp}] [{level}] {message}")
 
 #创建偏函数
