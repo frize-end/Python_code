@@ -62,7 +62,7 @@ class ShoppingCart:
                 return None, f"商品 {item.name} 库存不足"
 
         change = payment - total
-        items_purchased = list(self.items.values())
+        items_purchased = list(self.items.values())  # noqa: F841
         self.items = {}  # 清空购物车
         return change, f"支付成功！找零: {change} 元"
 
@@ -174,7 +174,7 @@ class ShoppingSystem:
                 print(f"{item.id}\t{item.name}\t{item.price}元\t{quantity}\t{subtotal}元")
 
             total = self.cart.get_total()
-            print(f"----------------------")
+            print("----------------------")
             print(f"总计: {total} 元")
         print("===============\n")
 

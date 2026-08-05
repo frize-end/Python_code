@@ -28,7 +28,7 @@ data=[1,2,3,4,5,6,7,8,9,10]
 even_numbers=list(filter(lambda x:x%2==0,data))
 print(f"偶数：{even_numbers}")
 #map映射
-square_numbers=list(map(lambda x: x**2,data))
+square_numbers=list(map(lambda x: x**2,data))  # noqa: C417
 print(f"平方数：{square_numbers}")
 #使用列表推导式
 even_square_numbers=[x**2 for x in data if x%2==0]
@@ -40,6 +40,7 @@ print(f"过滤长度大于五的单词并大写{long_words_upper}")
 
 #数据分组
 from collections import defaultdict
+
 students=[
     {"name":"张三","age":17,"class":"A班","score":98},
     {"name":"李四","age":18,"class":"B班","score":86},

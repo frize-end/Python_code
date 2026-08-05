@@ -20,7 +20,10 @@ print(f"用*来处理剩下的元素：{a},{b},{rest}")
 m,*body,n,q=range(5)
 print(f"平行赋值：{m},{body},{n},{q}")
 #命名元组
-from collections import namedtuple  #使用from ... import ...可以从模块中导入特定的部分，如函数、类或变量
+from collections import (
+    namedtuple,  #使用from ... import ...可以从模块中导入特定的部分，如函数、类或变量
+)
+
 Point=namedtuple('Point',['x','y'])
 p = Point(1,2)
 print(f"命名元组：{p}")
