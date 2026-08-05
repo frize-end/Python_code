@@ -44,3 +44,10 @@ class StudentManager:
             if not score:
                 return 0
             return sum(score)/len(score)
+        def list_students(self):
+            print("-" * 60)
+            print("学生列表：")
+            for student_id,info in self.students.items():
+                avg_score = self.get_student_average(student_id)
+                print(f"学号：{student_id}，姓名：{info['name']}，年龄：{info['age']}，考试成绩：{info['score']}，平均分：{avg_score:.1f}")
+            print("-" * 60)
