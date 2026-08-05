@@ -47,7 +47,44 @@ class StudentManager:
         def list_students(self):
             print("-" * 60)
             print("学生列表：")
-            for student_id,info in self.students.items():
+            for student_id,info in self.students.items():  # noqa: PLR1704
                 avg_score = self.get_student_average(student_id)
                 print(f"学号：{student_id}，姓名：{info['name']}，年龄：{info['age']}，考试成绩：{info['score']}，平均分：{avg_score:.1f}")
             print("-" * 60)
+        def surche_student(self, keyword):
+            results = []
+            for student_id, info in self.students.items():  # noqa: PLR1704
+                if (keyword.lower() in info["name"].lower() or 
+                keyword in student_id):
+                    results.append((student_id, info))
+
+                if results:
+                  print(f"\n找到 {len(results)} 个匹配结果:")
+            for student_id, info in results:
+                print(f"学号: {student_id}, 姓名: {info['name']}")
+            else:  # noqa: PLW0120
+                print("未找到匹配的学生")
+# 测试学生管理系统
+if __name__ == "__main__":
+    sm = StudentManager()
+    
+    try:
+        # 添加学生
+        sm.add_student("2023001", "张三", 20)
+        sm.add_student("2023002", "李四", 21)
+        sm.add_student("2023003", "王五", 19)
+        
+        # 添加成绩
+        sm.add_score("2023001", 85)
+        sm.add_score("2023001", 92)
+        sm.add_score("2023002", 78)
+        sm.add_score("2023002", 88)
+        
+        # 列出所有学生
+        sm.list_students()
+        
+        # 搜索学生
+        sm.search_student("张")
+        
+    except ValueError as e:
+        print(f"错误: {e}")
