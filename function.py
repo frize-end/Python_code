@@ -258,3 +258,24 @@ def manual_cache(func):
 
     wrapper.cache = cache
     return wrapper
+
+@manual_cache
+def fibonacci_cached(n):
+    """计算带缓存的斐波那契数列"""
+    if n<=1:
+        return n
+    return fibonacci_cached(n-1)+fibonacci_cached(n-2)
+
+# 测试缓存
+print("测试LRU缓存:")
+start_time = time.time()
+result1 = expensive_function(5)
+print(f"第一次调用耗时: {time.time() - start_time:.3f}秒")
+
+start_time = time.time()
+result2 = expensive_function(5)  # 从缓存获取
+print(f"第二次调用耗时: {time.time() - start_time:.3f}秒")
+
+print("\n测试手动缓存:")
+result = fibonacci_cached(10)
+print(f"fibonacci(10) = {result}")
