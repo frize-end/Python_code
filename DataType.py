@@ -23,7 +23,7 @@ print(f"奇数位数字{num1[::2]}")
 print(f"反转列表：{num[::-1]}")
 #列表的遍历
 print("\n遍历列表：")
-for i,num in enumerate(num):
+for i,num in enumerate(num):  # noqa: B020
     print(f"索引{i},元素：{num}")
 #列表推导式
 sqlite=[x**2 for x in range(1,11)]

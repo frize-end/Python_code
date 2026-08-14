@@ -8,7 +8,7 @@ def safe_divide(a, b):
     except TypeError:
         print("错误；参数不正确")
         return None
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         print(f"未知错误；{e}")
         return None
     finally:
@@ -40,7 +40,7 @@ def process_user_input():
             print(f"数值错误: {e}")
     except KeyboardInterrupt:
         print("\n用户中断了程序")
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         print(f"未预期的错误: {e}")
     else:
         print("计算成功完成")
@@ -51,8 +51,8 @@ process_user_input()
 
 #自定义异常
 class CustomError(Exception):
- """自定义异常基类"""
-pass
+    """自定义异常基类"""
+    pass  # noqa: PIE790
 class AgeError(Exception):
     """年龄相关异常"""
 def __init__(self,age,message="年龄值无效"):
@@ -112,5 +112,5 @@ for data in test_list:
         print(f"√ ，{data}的平均值是{result}")
     except AssertionError as e:
         print(f"× ， 断言失败 ：{e}")
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         print(f"× ， 其他错误：{e}")
