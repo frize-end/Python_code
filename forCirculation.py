@@ -29,7 +29,7 @@ for i in range(10,0,-1):
 #多列表遍历
 name=["张三","李四","王五"]
 age=[20,18,25]
-for name,age in zip(name,age):
+for name,age in zip(name,age):  # noqa: B020
     print(f"{name}:{age}岁")
 #嵌套循环
 print("九九乘法表")

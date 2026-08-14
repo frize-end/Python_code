@@ -229,3 +229,15 @@ print(f"5的立方：{cube(5)}")
 info_log("程序启动")
 warning_log("内存使用过高")
 error_log("数据库连接失败")
+
+
+#函数缓存
+import time
+from functools import lru_cache
+
+@lru_cache(maxsize=128)
+def expensive_function(n):
+    """模拟耗时计算"""
+    print(f"计算 expensive_function({n})")
+    time.sleep(0.1)
+    return n*n*n
