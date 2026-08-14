@@ -235,9 +235,26 @@ error_log("数据库连接失败")
 import time
 from functools import lru_cache
 
+
 @lru_cache(maxsize=128)
 def expensive_function(n):
     """模拟耗时计算"""
     print(f"计算 expensive_function({n})")
     time.sleep(0.1)
     return n*n*n
+
+def manual_cache(func):
+    """手动实现缓存装饰器"""
+    cache={}
+
+    def wrapper(*args, **kwarges):
+        key=str(args) + str(sorted(kwarges.items()))
+        if key not in cache:
+            cache[key]=func(*args, **kwarges)
+            print("缓存未命中,计算结果")
+        else:
+            print("缓存命中，直接返回结果")
+            return cache[key]
+
+    wrapper.cache = cache
+    return wrapper
