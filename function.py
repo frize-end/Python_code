@@ -279,3 +279,4 @@ print(f"第二次调用耗时: {time.time() - start_time:.3f}秒")
 print("\n测试手动缓存:")
 result = fibonacci_cached(10)
 print(f"fibonacci(10) = {result}")
+//ceshi
